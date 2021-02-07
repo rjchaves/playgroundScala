@@ -17,29 +17,49 @@ class Rational (n: Int, d: Int){
     )
 
   def + (that: Int) : Rational =
-    new Rational(numerator + that * denominator, denominator )
+    new Rational(
+      numerator + that * denominator,
+      denominator
+    )
 
   def - (that: Rational) : Rational =
-    new Rational(this.numerator*that.denominator - that.numerator * this.denominator,
-      this.denominator * that.denominator)
+    new Rational(
+      this.numerator*that.denominator - that.numerator * this.denominator,
+      this.denominator * that.denominator
+    )
 
   def - (that: Int) : Rational =
-    new Rational(this.numerator - that * denominator, denominator)
+    new Rational(
+      this.numerator - that * denominator,
+      denominator
+    )
 
   def * (that: Rational) : Rational =
-    new Rational(this.numerator * that.numerator, this.denominator * that.denominator)
+    new Rational(
+      this.numerator * that.numerator,
+      this.denominator * that.denominator
+    )
 
   def * (that: Int) : Rational =
-    new Rational(this.numerator * that, this.denominator)
+    new Rational(
+      this.numerator * that,
+      this.denominator
+    )
 
   def < (that:Rational): Boolean =
     this.numerator * that.denominator < that.numerator * this.denominator
 
   def / (that: Rational) : Rational =
-    new Rational(this.numerator * that.denominator, that.denominator * this.denominator)
+    new Rational(
+      this.numerator * that.denominator,
+      that.denominator * this.denominator
+    )
 
   def / (that : Int) : Rational =
-    new Rational(this.numerator, this.denominator * that)
+    new Rational(
+      this.numerator,
+      this.denominator * that
+    )
 
   def max (that:Rational): Rational =
     if(this < that) that else this
