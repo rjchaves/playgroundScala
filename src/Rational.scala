@@ -1,7 +1,7 @@
 import scala.annotation.tailrec
 
 //usar implicit def intToRational(x: Int) = new Rational(x) para scala.language.implicitConversions
-class Rational (n: Int, d: Int){
+class Rational (n: Int, d: Int) extends Ordered[Rational]{
   require(d != 0)
   private val g = gcd(n.abs, d.abs)
   val numerator: Int = n / g
@@ -46,9 +46,6 @@ class Rational (n: Int, d: Int){
       this.denominator
     )
 
-  def < (that:Rational): Boolean =
-    this.numerator * that.denominator < that.numerator * this.denominator
-
   def / (that: Rational) : Rational =
     new Rational(
       this.numerator * that.denominator,
@@ -70,5 +67,9 @@ class Rational (n: Int, d: Int){
   @tailrec
   private def gcd(i: Int, l: Int): Int = {
     if(l == 0) i else gcd(l, i % l)
+  }
+
+  override def compare(that: Rational): Int = {
+    (this.numerator*that.denominator) - (that.numerator*this.denominator)
   }
 }
