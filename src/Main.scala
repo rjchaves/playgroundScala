@@ -1,4 +1,8 @@
+import java.io.{File, PrintWriter}
+import java.util.Date
 import scala.collection.mutable
+import scala.io.Source
+import scala.reflect.api.Printers
 
 object Main extends App {
   val greetings = new Array[String](1)
@@ -26,6 +30,42 @@ object Main extends App {
   println(
     s"""|Hello
        |$name""".stripMargin.trim)
-  val i:BigInt = null;
-  println(i + 2)
+
+
+
+  def filelines(file: File) =
+    Source.fromFile(file).getLines().toArray
+
+  val filesHere = new File("./src").listFiles()
+
+  def grep(pattern: String) = {
+    for(
+      file <- filesHere
+      if file.getName.endsWith(".scala");
+      line <- filelines(file);
+      lineTrimmed = line.trim
+      if lineTrimmed.matches(pattern)
+    ) println(s"$file: ${lineTrimmed}")
+  }
+  grep(".*gcd.*")
+
+
+  def echo(args : String*) = for(s <- args) println(s)
+
+  val seq = Seq("what's", "up")
+  echo(seq: _*)
+
+  def withPrintWriter(file: File)(op: PrintWriter => Unit) = {
+    val writer = new PrintWriter(file)
+    try {
+      op(writer)
+    } finally {
+      writer.close();
+    }
+  }
+
+  val file = new File("data.txt");
+  withPrintWriter(file){ writer =>
+    writer.println(new Date())
+  }
 }
