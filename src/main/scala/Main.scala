@@ -1,10 +1,5 @@
 import dimensional.Spiral.spiral
 
-import java.io.{File, PrintWriter}
-import java.util.Date
-import scala.collection.mutable
-import scala.io.Source
-
 object Main extends App {
 //  val greetings = new Array[String](1)
 //  greetings(0) = "teste"
