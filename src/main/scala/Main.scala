@@ -1,5 +1,7 @@
 import dimensional.Spiral.spiral
 
+import scala.annotation.tailrec
+
 object Main extends App {
 //  val greetings = new Array[String](1)
 //  greetings(0) = "teste"
@@ -64,6 +66,27 @@ object Main extends App {
 //  withPrintWriter(file){ writer =>
 //    writer.println(new Date())
 //  }
+
+//  def isort(xs: List[Int]) : List[Int] =
+//    if(xs.isEmpty) Nil
+//    else insert(xs.head, isort(xs.tail))
+//
+//  def insert(x: Int, xs: List[Int]) : List[Int] =
+//    if(xs.isEmpty || x <= xs.head) x :: xs
+//    else xs.head :: insert(x, xs.tail)
+
+  def insert(x: Int, xs: List[Int]): List[Int] =
+    xs match {
+      case List() => List(x)
+      case y :: ys => if (x <= y) x :: xs
+                      else y :: insert(x, xs)
+    }
+
+  def isort(xs: List[Int]): List[Int] =
+    xs match {
+      case List()  => List()
+      case x :: xs => insert(x, isort(xs))
+    }
 
   println(spiral(200, 1))
 }
