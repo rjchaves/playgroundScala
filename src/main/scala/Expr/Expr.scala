@@ -42,7 +42,7 @@ class ExprFormatter {
   private val unaryPrecedence = opGroups.length
   private val fractionPrecedence = -1
 
-  private def format(e: Expr, enclPrec: Int): Element = {
+  private def format(e: Expr, enclPrec: Int): Element =
     e match {
       case Var(name) => elem(name)
       case Number(num) =>
@@ -67,6 +67,5 @@ class ExprFormatter {
         if (enclPrec <= opPrec) oper
         else elem("(") beside oper beside elem(")")
     }
-    format(e) = format(e, 0)
-  }
+  def format(e: Expr):Element = format(e, 0)
 }
